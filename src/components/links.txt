@@ -1,0 +1,12 @@
+    {
+      title: 'TikTok Dance Edit',
+      platform: 'TikTok',
+      embedUrl: 'https://www.tiktok.com/embed/v2/7440134072703372590', // Replace with your TikTok video's embed URL
+      profileLink: 'https://www.tiktok.com/@crooooooooooooos', // Your TikTok profile
+    },
+    {
+      title: 'YouTube Cinematic Intro',
+      platform: 'YouTube',
+      embedUrl: 'https://www.youtube.com/embed/at08VFUrZoU', // Replace with your YouTube video's embed URL
+      profileLink: 'https://www.youtube.com/@yourusername', // Your YouTube profile/channel
+    },

@@ -16,9 +16,8 @@ function Home({ isDarkMode }) {
       />
       <h2 style={styles.heading}>Welcome!</h2>
       <p style={styles.text}>
-        Hi, I’m Efron ! I’m a website developer who loves building fun and awesome things.
-        Check out my projects below!
-      </p>
+  Hi, I’m Efron Tilahun! I’m a web designer and video editor crafting stunning websites and dynamic edits for TikTok and YouTube. Check out my work below!
+</p>
     </section>
   );
 }

@@ -5,6 +5,11 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import Thumbnails from './components/Thumbnails';
+import Videos from './components/Videos'; // Should already be here
+// Inside the return:
+
+
 import './App.css';
 
 function App() {
@@ -50,6 +55,8 @@ function App() {
         <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
         <Home isDarkMode={isDarkMode} />
         <Projects isDarkMode={isDarkMode} />
+        <Videos isDarkMode={isDarkMode} /> {/* Between Projects and Contact */}
+        <Thumbnails isDarkMode={isDarkMode} />
         <Contact isDarkMode={isDarkMode} />
       </div>
     </div>
