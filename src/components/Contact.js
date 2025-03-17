@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 function Contact({ isDarkMode }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState(''); // For success/error messages
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -9,9 +11,29 @@ function Contact({ isDarkMode }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Message sent! (Demo mode)');
-    console.log(formData);
-    setFormData({ name: '', email: '', message: '' });
+
+    // EmailJS send function
+    emailjs
+      .send(
+        'service_2bqd2v1', // Replace with your Service ID
+        'template_alujsgo', // Replace with your Template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        'UNUIkSadzTlIl0JAq' // Replace with your Public Key (User ID)
+      )
+      .then(
+        (result) => {
+          setStatus('Message sent successfully!');
+          setFormData({ name: '', email: '', message: '' }); // Clear form
+        },
+        (error) => {
+          setStatus('Failed to send message. Try again later.');
+          console.error('EmailJS error:', error.text);
+        }
+      );
   };
 
   return (
@@ -48,51 +70,50 @@ function Contact({ isDarkMode }) {
           Send Message
         </button>
       </form>
+      {status && <p style={styles.status}>{status}</p>} {/* Show success/error */}
     </section>
   );
 }
 
 const styles = {
   section: {
-    padding: '80px 20px',
+    padding: 'clamp(40px, 10vw, 80px) 5%',
     borderRadius: '12px',
   },
   heading: {
-    fontSize: '36px',
+    fontSize: 'clamp(24px, 6vw, 36px)',
     color: '#4a90e2',
     marginBottom: '40px',
   },
   form: {
-    maxWidth: '600px',
+    maxWidth: '90%',
+    width: 'clamp(300px, 80%, 600px)',
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
-    gap: '15px',
   },
   input: {
-    padding: '15px',
-    fontSize: '16px',
+    padding: 'clamp(10px, 3vw, 15px)',
+    margin: 'clamp(10px, 2vw, 15px) 0',
+    fontSize: 'clamp(14px, 3vw, 16px)',
     borderRadius: '8px',
     border: '1px solid #ddd',
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
     color: '#333',
-    width: '100%', // Full width on all screens
-    boxSizing: 'border-box',
   },
   textarea: {
-    padding: '15px',
-    fontSize: '16px',
+    padding: 'clamp(10px, 3vw, 15px)',
+    margin: 'clamp(10px, 2vw, 15px) 0',
+    fontSize: 'clamp(14px, 3vw, 16px)',
     borderRadius: '8px',
     border: '1px solid #ddd',
-    minHeight: '150px',
+    minHeight: 'clamp(100px, 20vw, 150px)',
     boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
     color: '#333',
-    width: '100%',
-    boxSizing: 'border-box',
   },
   button: {
-    padding: '15px',
-    fontSize: '18px',
+    padding: 'clamp(10px, 3vw, 15px)',
+    fontSize: 'clamp(16px, 4vw, 18px)',
     backgroundColor: '#e94e77',
     color: '#fff',
     border: 'none',
@@ -101,38 +122,11 @@ const styles = {
     transition: 'background-color 0.3s',
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
   },
+  status: {
+    marginTop: '20px',
+    fontSize: 'clamp(14px, 3vw, 16px)',
+    color: '#4a90e2',
+  },
 };
-
-/* Responsive styles */
-const responsiveStyles = `
-  @media (max-width: 768px) {
-    section {
-      padding: 50px 15px;
-    }
-    .heading {
-      font-size: 30px;
-    }
-    .form {
-      max-width: 90%;
-    }
-  }
-  @media (max-width: 480px) {
-    section {
-      padding: 30px 10px;
-    }
-    .input, .textarea {
-      padding: 12px;
-      font-size: 14px;
-    }
-    .button {
-      padding: 12px;
-      font-size: 16px;
-    }
-  }
-`;
-
-const styleSheet = document.createElement('style');
-styleSheet.textContent = responsiveStyles;
-document.head.appendChild(styleSheet);
 
 export default Contact;
