@@ -1,10 +1,22 @@
 import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 function Header({ isDarkMode, toggleTheme }) {
   return (
     <header style={{ ...styles.header, backgroundColor: isDarkMode ? '#0f0f23' : '#4a90e2' }}>
       <h1 style={styles.title}>
-        <span style={styles.typingText}>Efron's Portfolio</span>
+        <TypeAnimation
+          sequence={[
+            "Efron Tilahun's Portfolio", // Your name here
+            2000, // Wait 2 seconds
+            "Efron Tilahun's Creations", // Another variation
+            2000,
+          ]}
+          wrapper="span"
+          speed={50} // Typing speed
+          repeat={Infinity} // Loop forever
+          style={{ display: 'inline-block', color: '#fff' }}
+        />
       </h1>
       <nav style={styles.nav}>
         <a href="#home" style={styles.navLink}>Home</a>
@@ -34,13 +46,6 @@ const styles = {
     fontSize: 'clamp(20px, 5vw, 28px)',
     margin: 0,
     textShadow: '1px 1px 3px rgba(0, 0, 0, 0.3)',
-  },
-  typingText: {
-    color: '#fff',
-    overflow: 'hidden',
-    borderRight: '2px solid #fff', // Cursor effect
-    whiteSpace: 'nowrap',
-    animation: 'typing 3s steps(20, end) infinite, blink 0.75s step-end infinite',
   },
   nav: {
     display: 'flex',
